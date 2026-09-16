@@ -8,8 +8,8 @@ public class PressurePlate : MonoBehaviour
     [Header("Requirements")]
     [Tooltip("Layers that count as valid weight on this plate (crates, players, etc).")]
     public LayerMask validMask;
-    [Tooltip("Minimum number of valid objects simultaneously on the plate to activate it.")]
-    public int requiredCount = 1;
+    [Tooltip("Total combined mass required to activate the plate.")]
+    public float requiredWeight = 1f;
 
     [Header("Events")]
     public UnityEvent onActivated;
@@ -24,7 +24,7 @@ public class PressurePlate : MonoBehaviour
     public Transform visualPlate;
     public float pressedOffset = -0.05f;
 
-    private readonly HashSet<Collider> objectsOnPlate = new HashSet<Collider>();
+    private readonly Dictionary<Collider, float> objectsOnPlate = new Dictionary<Collider, float>();
     private bool isActive;
     private Vector3 visualRestLocalPos;
 
@@ -42,7 +42,8 @@ public class PressurePlate : MonoBehaviour
         if (((1 << other.gameObject.layer) & validMask) == 0)
             return;
 
-        objectsOnPlate.Add(other);
+        float weight = GetWeight(other);
+        objectsOnPlate[other] = weight;
         Evaluate();
     }
 
@@ -52,11 +53,33 @@ public class PressurePlate : MonoBehaviour
         Evaluate();
     }
 
+    private float GetWeight(Collider col)
+    {
+        var rb = col.attachedRigidbody;
+        return rb != null ? rb.mass : 1f; // fallback weight if no Rigidbody found
+    }
+
+    private float CurrentWeight()
+    {
+        float total = 0f;
+        foreach (var kvp in objectsOnPlate)
+            total += kvp.Value;
+        return total;
+    }
+
     private void Evaluate()
     {
-        objectsOnPlate.RemoveWhere(c => c == null || !c.gameObject.activeInHierarchy);
+        // Clean out anything destroyed/disabled while it was overlapping
+        var toRemove = new List<Collider>();
+        foreach (var col in objectsOnPlate.Keys)
+        {
+            if (col == null || !col.gameObject.activeInHierarchy)
+                toRemove.Add(col);
+        }
+        foreach (var col in toRemove)
+            objectsOnPlate.Remove(col);
 
-        bool shouldBeActive = objectsOnPlate.Count >= requiredCount;
+        bool shouldBeActive = CurrentWeight() >= requiredWeight;
 
         if (shouldBeActive && !isActive)
         {
