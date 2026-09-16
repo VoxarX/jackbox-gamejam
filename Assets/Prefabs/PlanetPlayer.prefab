@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3606490735967750006}
   - component: {fileID: 4823110239537770675}
   - component: {fileID: 2939582195004190710}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2230222981774180424}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6256445668574344547}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 3839992973359997269}
   - component: {fileID: 1790046538184368664}
   - component: {fileID: 285119181849279543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlanetPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5154484800931780872}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 85
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -424,7 +424,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5278907125720542036}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,7 +458,7 @@ GameObject:
   - component: {fileID: 1008620608648282347}
   - component: {fileID: 7238266595870415486}
   - component: {fileID: 278744296435227965}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -596,7 +596,7 @@ GameObject:
   - component: {fileID: 609152290494059086}
   - component: {fileID: 8484107525272431231}
   - component: {fileID: 6480603613696868919}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
